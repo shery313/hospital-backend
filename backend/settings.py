@@ -30,8 +30,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://catholic-wamba-hospital-9da133e96346.herokuapp.com",
 ]
-
-
+CSRF_TRUSTED_ORIGINS = ['https://catholic-wamba-hospital-9da133e96346.herokuapp.com','http://127.0.0.1']
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+CORS_ALLOW_ALL_ORIGINS = True
 # Application definition
 
 INSTALLED_APPS = [
