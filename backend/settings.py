@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-a6+lp#ejpc8a*s8)x^ejtgo(k=y+2th+#9r9&rl+9$t&!(z^%f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['catholic-wamba-hospital-9da133e96346.herokuapp.com']
+ALLOWED_HOSTS = ['catholic-wamba-hospital-9da133e96346.herokuapp.com','127.0.0.1']
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://catholic-wamba-hospital-9da133e96346.herokuapp.com",
+]
 
 
 # Application definition
@@ -39,10 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'wabma',
     'rest_framework',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
