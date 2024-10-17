@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView,RetrieveAPIView
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
-from .serializers import AppointmentSerializer,DoctorSerializer,BlogSerializer,TestimonialSerializer,NewsAndEventSerializer
-from .models import Appointment,Doctor,Blog,Testimonial,NewsAndEvents
+from .serializers import AppointmentSerializer,DoctorSerializer,NewsLetterSerializer,ContactSerializer,BlogSerializer,TestimonialSerializer,NewsAndEventSerializer
+from .models import Appointment,Doctor,Blog,Testimonial,NewsAndEvents,Contact,Newsletter
 
 # Create your views here.
 class AppointmentListCreateView(ListCreateAPIView):
@@ -14,6 +14,11 @@ class DoctorsListCreateView(ListCreateAPIView):
     queryset=Doctor.objects.all()
     serializer_class=DoctorSerializer
     permission_classes=[AllowAny,]
+class DoctorDetialView(RetrieveAPIView):
+    serializer_class=DoctorSerializer
+    def get_object(self):
+        slug=self.kwargs.get('slug')
+        return Doctor.objects.get(slug=slug)
 class BlogListCreateView(ListCreateAPIView):
     queryset=Blog.objects.all()
     serializer_class=BlogSerializer
@@ -37,3 +42,11 @@ class NewsAndEventDetailView(RetrieveAPIView):
     def get_object(self):
         slug=self.kwargs.get('slug')
         return NewsAndEvents.objects.get(slug=slug)
+class NewsLetterListCreateView(ListCreateAPIView):
+    queryset=Newsletter.objects.all()
+    serializer_class=NewsLetterSerializer
+    permission_classes=[AllowAny,]
+class ContactListCreateView(ListCreateAPIView):
+    queryset=Contact.objects.all()
+    serializer_class=ContactSerializer
+    permission_classes=[AllowAny,]

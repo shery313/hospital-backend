@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 # from serializers import model
-from .models import Appointment,Doctor,NewsAndEvents,Testimonial,Blog
+from .models import Appointment,Doctor,NewsAndEvents,Testimonial,Blog,Newsletter,Contact
 
 class AppointmentSerializer(ModelSerializer):
     class Meta:
@@ -21,4 +21,12 @@ class NewsAndEventSerializer(ModelSerializer):
 class TestimonialSerializer(ModelSerializer):
     class Meta:
         model=Testimonial
+        fields='__all__'
+class NewsLetterSerializer(ModelSerializer):
+    class Meta:
+        model=Newsletter
+        fields='__all__'
+class ContactSerializer(ModelSerializer):
+    class Meta:
+        model=Contact
         fields='__all__'

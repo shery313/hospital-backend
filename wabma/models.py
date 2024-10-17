@@ -126,26 +126,21 @@ class NewsAndEvents(models.Model):
         super(NewsAndEvents, self).save(*args, **kwargs)
 
 
-# Prescription management related model
-class Prescription(models.Model):
-    patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='prescriptions')
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='prescriptions')
-    medication_name = models.CharField(max_length=255)
-    dosage = models.CharField(max_length=100)
-    frequency = models.CharField(max_length=100)
-    prescribed_date = models.DateTimeField(auto_now_add=True)
-    refill_status = models.BooleanField(default=False)
-    
-    def __str__(self):
-        return f"{self.medication_name} for {self.patient.username}"
 
+class Contact(models.Model):
+    name=models.CharField(max_length=200)
+    email=models.EmailField()
+    phone=models.IntegerField()
+    message=models.TextField()
+    date=models.DateTimeField(auto_now_add=True)
 
-# Health metric tracking for patients
-class HealthMetric(models.Model):
-    patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='health_metrics')
-    metric_type = models.CharField(max_length=100)  # Example: Weight, Blood Pressure, etc.
-    value = models.DecimalField(max_digits=5, decimal_places=2)
-    measured_date = models.DateTimeField(default=timezone.now)
-    
     def __str__(self):
-        return f"{self.metric_type}: {self.value} for {self.patient.username}"
+        return self.name
+
+class Newsletter(models.Model):
+    email=models.EmailField(unique=True)
+    is_subscribed=models.BooleanField(default=True)
+    date=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
